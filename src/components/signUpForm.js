@@ -2,6 +2,22 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const SignUpForm = () => {
+    const formData = {
+        lastName: null,
+        firstName: null,
+        email: null,
+        userName: null,
+        password: null,
+        passwordConfirmation:null,
+        errors:{
+            lastName: "",
+            firstName: "",
+            email: "",
+            userName: "",
+            password: "",
+            passwordConfirmation:"",
+        }
+    }
     return (
         <div className="container" id="SignInComponent" >
             <div className="card">
@@ -9,8 +25,8 @@ const SignUpForm = () => {
                     <h5 className="card-title">S'inscrire </h5>
                     <form>
 
-                        <label for="LastName">Nom</label>
-                        <input type="text" className="form-control" id="LastName" />
+                        <label for="lastName">Nom</label>
+                        <input type="text" className="form-control" id="lastName" />
 
                         <label for="fisrtName">Prenom</label>
                         <input type="text" className="form-control" id="firstName" />
