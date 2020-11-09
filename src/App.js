@@ -6,7 +6,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import SignUpForm from "./components/signUpForm(lvl 3)";
+import SignUpForm from "./components/signUpForm lvl 3/signUpForm(lvl 3)";
 import SignInForm from "./components/signInForm";
 
 function App() {

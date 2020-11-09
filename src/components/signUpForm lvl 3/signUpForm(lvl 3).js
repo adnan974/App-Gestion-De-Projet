@@ -1,38 +1,25 @@
 import {React,useState} from "react";
 import { Link } from "react-router-dom";
+import useForm from "./useForm";
+import Validate from "./validateLogin"
 
 const SignUpForm = () => {
-    
-    const [values,setValues] = useState(
-        {
-            lastName:"",
-            firstName:"",
-            email:"",
-            username:"",
-            password:"",
 
-        }
-    )
-
-    const handleChange = (e) => {
-        const {name,value} = e.target
-        console.log(value)
-        
-        setValues({...values,[name]:value})
-        console.log(values)
+    const submit = () =>{
+        console.log("submited succesfully")
     }
 
-   
+    const {values,handleChange,handleSubmit} = useForm(submit,Validate);
     
     return (
         <div className="container" id="SignInComponent" >
             <div className="card">
                 <div className="card-body">
                     <h5 className="card-title">S'inscrire </h5>
-                    <form noValidate>
+                    <form onSubmit={handleSubmit} noValidate>
 
                         <label htmlFor="lastName">Nom</label>
-                        <input type="text" className="form-control" id="lastName" name="lastName" onChange={handleChange}/>
+                        <input type="text" className="form-control" id="lastName" name="lastName"  onChange={handleChange}/>
 
                         <label htmlFor="fisrtName">Prenom</label>
                         <input type="text" className="form-control" id="firstName" name="firstName" onChange={handleChange} />
