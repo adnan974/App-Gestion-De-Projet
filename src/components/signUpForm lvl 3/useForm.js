@@ -7,7 +7,7 @@ const useForm = (callback,validate)=>{
             lastName:"",
             firstName:"",
             email:"",
-            username:"",
+            userName:"",
             password:"",
 
         }
@@ -18,11 +18,12 @@ const useForm = (callback,validate)=>{
             lastName:"",
             firstName:"",
             email:"",
-            username:"",
+            userName:"",
             password:"",
 
         }
     )
+
 
     const handleChange = (e) => {
         const {name,value} = e.target
