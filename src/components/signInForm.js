@@ -9,9 +9,9 @@ const SignInForm = () => {
                 <div className="card-body">
                     <h5 className="card-title">Connexion </h5>
                     <form>
-                        <label for="userName">Nom d'utilisateur </label>
+                        <label htmlFor="userName">Nom d'utilisateur </label>
                         <input type="text" className="form-control" id="userName" />
-                        <label for="passwordInput">Mot de passe</label>
+                        <label htmlFor="passwordInput">Mot de passe</label>
                         <input type="password" className="form-control" id="passwordInput" />
                         <button type="submit" className="btn btn-outline-primary" >valider</button>
                     </form>

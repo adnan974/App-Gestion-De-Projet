@@ -4,7 +4,7 @@ export default function ValidateLogin(values){
     console.log(values)
     if(!values.email){
         errors.email = "L'adresse mail est obligatoire"
-    }else if (/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(values.email)){
+    }else if (/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(values.email) === false){
         errors.email = "L'adresse mail est invalide"
     }
 
