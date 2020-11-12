@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react';
 import ReactDOM from 'react-dom';
 
-import './styles.css';
+//import './styles.css';
 
 const initialState = {
     values: {},

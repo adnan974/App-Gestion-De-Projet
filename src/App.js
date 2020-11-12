@@ -6,7 +6,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import SignUpForm from "./components/signUpForm lvl 2/signUpForm(lvl 2)";
+import SignUpForm from "./components/signUpForm lvl 3 bis/signUpForm lvl 3 bis";
 import SignInForm from "./components/signInForm";
 import LoginForm from "./components/signUpForm lvl 3/test";
 
@@ -19,7 +19,7 @@ function App() {
             <SignInForm />
           </Route>
           <Route path="/signIn" exact>
-            <LoginForm />
+            <SignInForm />
           </Route>
           <Route path="/signUp" exact>
             <SignUpForm />
