@@ -9,6 +9,7 @@ import {
 import SignUpForm from "./components/signUpForm lvl 3 bis/signUpForm lvl 3 bis";
 import SignInForm from "./components/signInForm";
 import LoginForm from "./components/signUpForm lvl 3/test";
+import NavBar from './components/NavBar/NavBar';
 
 function App() {
   return (
@@ -23,6 +24,9 @@ function App() {
           </Route>
           <Route path="/signUp" exact>
             <SignUpForm />
+          </Route>
+          <Route path="/home">
+            <NavBar/>
           </Route>
         </Switch>
       </div>
