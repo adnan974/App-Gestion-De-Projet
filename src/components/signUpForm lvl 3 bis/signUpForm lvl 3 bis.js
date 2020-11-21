@@ -84,11 +84,11 @@ const SignUpForm = () => {
                                     <ErrorMessage name="passwordConfirmation"   >{msg => <small className="text-danger">{msg}</small>}</ErrorMessage>
 
                                 </div>
-
                                 <button type="submit" className="btn btn-outline-primary" > Valider </button>
 
+
                             </Form>
-                            <Link to="/signIn">Se connecter</Link>
+                            <Link to="/signin">Se connecter</Link>
                         </div>
                     </Formik>
                 </div>

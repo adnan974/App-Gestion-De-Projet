@@ -1,6 +1,6 @@
 import React from "react";
 import "./signInForm.css";
-import { Link,useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import *  as Yup from "yup";
 
@@ -36,22 +36,24 @@ const SignInForm = () => {
                         <Form>
                             <div>
                                 <label htmlFor="username">Nom d'utilisateur </label>
-                                <Field name="username" type="text" className="form-control" id="userName" />
-                                <ErrorMessage name="username">{(msg)=><small className="text-danger"> {msg} </small>}</ErrorMessage>
+                                <Field name="username" type="text" className="form-control" id="username" />
+                                <ErrorMessage name="username">{(msg) => <small className="text-danger"> {msg} </small>}</ErrorMessage>
                             </div>
-                            
+
                             <div>
                                 <label htmlFor="password">Mot de passe</label>
                                 <Field name="password" type="password" className="form-control" id="password" />
-                                <ErrorMessage name="password">{(msg)=><small className="text-danger"> {msg} </small>}</ErrorMessage>
+                                <ErrorMessage name="password">{(msg) => <small className="text-danger"> {msg} </small>}</ErrorMessage>
                             </div>
-                            
+
 
 
                             <button type="submit" className="btn btn-outline-primary" >valider</button>
+
+
                         </Form>
                     </Formik>
-                    <Link to="/signUp">s'inscrire</Link>
+                    <Link to="/signup">s'inscrire</Link>
                 </div>
             </div>
         </div>
