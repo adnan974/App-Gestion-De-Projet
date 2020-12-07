@@ -3,18 +3,32 @@ import "./signInForm.css";
 import { Link, useHistory } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import *  as Yup from "yup";
+import axios from 'axios';
 
 const SignInForm = () => {
 
     const history = useHistory()
 
+
+
     const initialValues = {
-        userName: "",
+        username: "",
         password: "",
     }
 
-    const onSubmit = () => {
-        history.push("/home")
+    const onSubmit = async (values) => {
+        console.log(values);
+
+        await axios.post("http://localhost:3000/signin", values)
+            .then((res) => {
+
+                localStorage.setItem('token', res.data.access_token);
+                history.push("/home")
+            })
+            .catch(error => {
+                console.log(error);
+            })
+
     }
 
     const validationSchema = Yup.object({

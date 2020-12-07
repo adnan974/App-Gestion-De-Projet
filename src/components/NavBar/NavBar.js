@@ -6,10 +6,11 @@ import { NavbarData } from "./NavBarData";
 import "./NavBar.css";
 
 
-{/*  Tuto navbar :
+{/* tag : [navbar] 
+    Tuto navbar :
     Rq: c'est facile. Le plus dur est le css :(
     
-    - showSideBar : change le nom de la classe de la navbar. Cela permet d'affichet et de cacher la navbar grâce au css
+    - showSideBar : change le nom de la classe de la navbar. Cela permer d'affichet et de cacher la navbar grâce au css
                     appliqué sur la classe correspondante.
     - NavBarData  : Regroupe toutes les infos de la navbar. Ensuite grâce à une boucle on créer des LI et on lui met les 
                     Datas

@@ -4,9 +4,9 @@ import Project from '../pages/project'
 import NavBar from './NavBar/NavBar'
 import SignInForm from './signInForm'
 import SignUpForm from './signUpForm lvl 3 bis/signUpForm lvl 3 bis'
-
+// tag: [router]
 // Ce que j'ai appris :
-// - withRouter permet d'accéder à 
+// - withRouter permet d'accéder au parametre location, qui donne peut donner le pathname d'une url
 const RoutesManagement = withRouter(({ location }) => {
     return (
         <div>
