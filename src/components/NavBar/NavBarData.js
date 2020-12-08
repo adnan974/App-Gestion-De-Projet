@@ -10,19 +10,19 @@ export const NavbarData = [
         title: "Accueil",
         _className: "nav-text",
         icon: <FaIcons.FaCartPlus />,
-        path: "/Home",
+        path: "/home",
     },
     {
         title: "Projets",
         _className: "nav-text",
         icon: <IoIcons.IoMdPeople />,
-        path: "/Project",
+        path: "/project",
     },
     {
         title: "Tâches",
         _className: "nav-text",
         icon: <FaIcons.FaEnvelopeOpenText />,
-        path: "/Task",
+        path: "/task",
     }
 
 ]

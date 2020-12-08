@@ -4,9 +4,14 @@ import { Link, useHistory } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import *  as Yup from "yup";
 import axios from 'axios';
+import { AuthContext } from "../App";
+import jwt_decode from "jwt-decode";
+
 
 const SignInForm = () => {
-
+    //  Tag : [authentification state management] 
+    //  5
+    const { dispatch } = React.useContext(AuthContext);
     const history = useHistory()
 
 
@@ -21,8 +26,19 @@ const SignInForm = () => {
 
         await axios.post("http://localhost:3000/signin", values)
             .then((res) => {
+                let jwt = res.data.access_token;
 
-                localStorage.setItem('token', res.data.access_token);
+                let user = jwt_decode(jwt);
+                //localStorage.setItem('token', res.data.access_token);
+                //  Tag : [authentification state management] 
+                //  5  
+                dispatch({
+                    type: "LOGIN",
+                    payload: {
+                        token: jwt,
+                        user: user
+                    }
+                })
                 history.push("/home")
             })
             .catch(error => {
