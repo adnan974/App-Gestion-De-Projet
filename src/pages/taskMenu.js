@@ -4,7 +4,7 @@ import TaskCard from '../components/taskCard';
 import { useFetch } from '../shared/useFetch'
 
 function TaskMenu() {
-    const { data } = useFetch("http://localhost:3000/user/task/")
+    const [data] = useFetch("http://localhost:3000/user/task/")
 
     // A FAIRE: rendre cette partie générique DEJA UTILISEE DANS projectMenu 
     const buildProjectLayout = () => {

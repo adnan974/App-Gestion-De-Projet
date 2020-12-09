@@ -15,7 +15,7 @@ const RoutesManagement = withRouter(({ location }) => {
     return (
         <div>
             {
-                (location.pathname == "/home" || location.pathname == "/project" || location.pathname == "/task") && <NavBar />
+                (location.pathname == "/home" || location.pathname == "/project" || location.pathname == "/project/" || location.pathname == "/task") && <NavBar />
             }
             <Switch>
                 <Route path="/" exact >
@@ -40,7 +40,7 @@ const RoutesManagement = withRouter(({ location }) => {
                     {state.isAuthenticated ? <ProjectMenu /> : <Redirect to="/signin" />}
                 </Route>
                 <Route path="/project/:id">
-                    {state.isAuthenticated ? <Project /> : <Redirect to="/signin" />}
+                    {state.isAuthenticated ? <div><NavBar /> <Project /> </div> : <Redirect to="/signin" />}
                 </Route>
             </Switch>
 

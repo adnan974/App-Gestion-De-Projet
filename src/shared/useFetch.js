@@ -12,7 +12,6 @@ export const useFetch = (url) => {
 
     // Ici, on récupère les données de  l'api
     const getUrlData = async (url) => {
-        console.log(state)
         await Axios.get(url, { headers: { Authorization: `Bearer ${state.token}` } })
             .then(async (res) => {
                 // On ajoute les données dans data
@@ -23,9 +22,12 @@ export const useFetch = (url) => {
     // Ce useEffect se comporte commme la méthode didMount. Cette fonction va l'executer à l'initialisation
     // du composant uniquement.
     useEffect(async () => {
-        console.log("useEfect")
-        await getUrlData(url)
+        const fetchData = async () => {
+            console.log("use Effect est appelé")
+            await getUrlData(url)
+        }
+        fetchData()
     }, [])
 
-    return ({ data });
+    return ([data, setData]);
 }
