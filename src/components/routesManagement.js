@@ -42,6 +42,7 @@ const RoutesManagement = withRouter(({ location }) => {
                 <Route path="/project/:id">
                     {state.isAuthenticated ? <div><NavBar /> <Project /> </div> : <Redirect to="/signin" />}
                 </Route>
+
             </Switch>
 
         </div>

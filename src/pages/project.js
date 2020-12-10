@@ -1,20 +1,25 @@
 import Axios from 'axios';
-import React, { useContext } from 'react'
+import React, { createContext, useContext, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { AuthContext } from '../App';
 import ProjectTask from '../components/Project/ProjectTasks';
+import AddTask from '../components/Task/addTask';
 import { useFetch } from '../shared/useFetch'
+
+//  A FAIRE: ou ranger les contextes ?
+export const AddOperationContext = createContext()
 
 function Project() {
 
     const state = useContext(AuthContext)
     // Remarque : permet de récupérer l'id présent dans l'url
     let { id } = useParams();
-    //const [currentProjectData] = useFetch(`http://localhost:3000/project/${id}`)
+
+    const [showAddTaskComponent, setShowAddtaskComponent] = useState(false)
+
 
     const [taskData, setTaskData] = useFetch(`http://localhost:3000/project/task/${id}`)
     const [currentProjectData] = useFetch(`http://localhost:3000/project/${id}`)
-    console.log(taskData)
 
     const handleDeleteTask = (id) => {
         Axios.delete(`http://localhost:3000/task/delete/${id}`, { headers: { Authorization: `Bearer ${state.token}` } })
@@ -24,6 +29,12 @@ function Project() {
             })
     }
 
+    const handleAddTask = () => {
+        setShowAddtaskComponent(true)
+    }
+
+
+
 
     return (
 
@@ -31,12 +42,21 @@ function Project() {
             <h3>Titre: {currentProjectData && currentProjectData.titre}  </h3>
             <h4>Description: {currentProjectData && currentProjectData.description} </h4>
             <h4> Tâches </h4>
+            <button type="button" className="btn btn-primary btn-sm" data-toggle="modal" data-target="#updateOrAddTaskModal" onClick={handleAddTask}>Ajouter</button>
+
             <ul className="list-group">
                 {taskData && taskData.task.map((task) => {
                     return (
-                        <ProjectTask id={task.id} libelle={task.libelle} description={task.description} handleDelete={handleDeleteTask} />)
+                        <ProjectTask projectId={id} taskId={task.id} libelle={task.libelle} description={task.description} handleDelete={handleDeleteTask} />)
                 })}
             </ul>
+
+
+            <AddOperationContext.Provider
+                value={{ showAddTaskComponent, setShowAddtaskComponent }}
+            >
+                {showAddTaskComponent && <AddTask projectId={id} />}
+            </AddOperationContext.Provider>
 
 
         </div>

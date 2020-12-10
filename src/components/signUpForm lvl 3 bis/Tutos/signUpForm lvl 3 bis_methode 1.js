@@ -6,10 +6,12 @@ import * as Yup from 'yup';
 
 const SignUpForm = () => {
 
+    // Fonction onsubmit défini dans formik. Je pense qu'apres la validation d'un formulaire,
+    // Formik, va executer sa propro fonction onSubmit pui appelé la mienne
     const onSubmit = () => {
 
     }
-    // Algo de validation avec Yup
+    // Algo de validation avec Yup qui sera défini dans formik
     const validationSchema = Yup.object({
         name: Yup.string().required("Required"),
         email: Yup.string().email("Invalid email format").required("Required"),
@@ -18,12 +20,13 @@ const SignUpForm = () => {
 
 
     // TUTO FORMIK : Ceci est un formulaire complet avec la methode 1 d'utilisation de Formik
+    // TAG: [Formik]
     // formik.values contient les valeurs des input
     // formik.touched contient les valeurs des champs. Vrai si déjà utilisé, faux sinon
     // formik.errors contient les errors de formik
 
     // Fonctions sympas : OnBlur = {formik.handleBlur} => renvoie dans l'objet formik.touched 
-    //  si le champs a été utilisé (true) ou non (false).
+    // si le champs a été utilisé (true) ou non (false).
     // Utile nottament si on veut faire de la gestion de validation de formulaire seulement sur les champs utilisés 
     // par l'utilisateur
 
@@ -38,7 +41,7 @@ const SignUpForm = () => {
         // fonction exécuté après formik.handleSubmit
         onSubmit,
 
-        // Fonction utilisée avec un handleChange et Submit. 
+        // Fonction utilisée avec un handleChange et Submit. Formik va vérifier si les champs sont bien validés
         validationSchema,
     })
 

@@ -16,7 +16,7 @@ const SignUpForm = () => {
         email: "",
         channel: "",
     }
-    // Algo de validation avec Yup
+    // Algo de validation avec Yup.
     const validationSchema = Yup.object({
         name: Yup.string().required("Required"),
         email: Yup.string().email("Invalid email format").required("Required"),
@@ -74,7 +74,7 @@ const SignUpForm = () => {
                             </div>
                             <Link to="/signIn">se connecter</Link>
                         </Form>
-                        
+
                     </Formik>
                 </div>
             </div>

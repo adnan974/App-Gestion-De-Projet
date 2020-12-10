@@ -3,12 +3,17 @@ import { Link } from "react-router-dom";
 import useForm from "./useForm";
 import Validate from "./validateLogin"
 
+// TUTO: Fonctionnement du customHook
+// Tag:[useForm]
 const SignUpForm = () => {
 
     const submit = () => {
         console.log("submited succesfully")
     }
 
+    // A gauche, on récupère les variable et fonction qu'on va utiliser
+    // RQ: values colle aux valeurs dans le formulaire. Ce n'est pas générique
+    // A droite, on donne au hook une fonction de valisation et et schema de validation de formulaire
     const { values, handleChange, handleSubmit, errors } = useForm(submit, Validate);
 
     return (
@@ -16,9 +21,12 @@ const SignUpForm = () => {
             <div className="card">
                 <div className="card-body">
                     <h5 className="card-title">S'inscrire </h5>
+                    {/*On affecte la fonction handleSubmit du customHook dans le onSubmit du formulaire */}
                     <form onSubmit={handleSubmit} noValidate>
                         <div>
                             <label htmlFor="lastName">Nom</label>
+                            {/*On affecte la fonction handleChange du customHook dans le onChange du formulaire */}
+
                             <input type="text" className="form-control" id="lastName" name="lastName" onChange={handleChange} />
                             {errors && <small class="text-danger"> {errors.lastName} </small>}
                         </div>
