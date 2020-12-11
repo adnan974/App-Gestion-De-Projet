@@ -2,14 +2,28 @@ import React, { useEffect, useState } from "react";
 import ProjectCard from "../components/Project/projectCard"
 import { BoostrapRow } from "../components/bootstrapRow";
 import { useFetch } from "../shared/useFetch";
+import AddProject from "../components/Project/addProject";
 
 
 
-
+// TAG:[CRUD]
+// TUTO: comment le crud a été mis en place
+//     remarques:
+//        - Concernant les projets et les tâches, on a un formulaire communs pour l'ajout et la modification
+//          (voir le formulaire projectForm pour plus de détails )
+//              
 const ProjectMenu = () => {
 
+    //// TAG:[CRUD]
+    // remarque: ici j'utile useState. L'état me permettra de gérer l'affichage ou non de la page modale
+    //           liée à l'ajout dun projet
+    const [showAddProjectComponent, setShowAddProjectComponent] = useState(false)
 
-    const [ProjectData] = useFetch("http://localhost:3000/user/project")
+
+    //// TAG:[CRUD]
+    // remarque: useFectch apelle une api pour récupérer les projets de l'utilisateur
+    const [projectData, setProjectData] = useFetch("http://localhost:3000/user/project")
+
     //Tag : [buildLayout]
     // Cette fonction va construire les balises ou seront stockés les projets.
     // On aura des balises du type : 
@@ -27,14 +41,30 @@ const ProjectMenu = () => {
     //          .....
     //          ...
     // A FAIRE: rendre cette partie générique 
+
+    //// TAG:[CRUD]
+    // Cette est appelée après qu'un projet est delete. Cette 
+    // fonction met à jour le tableau qui contient les données du projet. Grâce à ca le projet supprimé est aussi
+    // supprimée de l'interface côté client
+    const updateProjectAfterRemove = async (id) => {
+        let projectDataUpdated = await projectData.filter(el => el.id != id)
+        console.log(projectDataUpdated)
+        console.log(projectData)
+        await setProjectData(projectDataUpdated)
+
+    }
     const buildProjectLayout = () => {
 
 
         let projectCardArray = [];
         let rowOfProjectCardArray = [];
 
-        ProjectData.map((project, index) => {
-            projectCardArray.push(<ProjectCard id={project.id} title={project.titre} description={project.description} />)
+        projectData.map((project, index) => {
+            //// TAG:[CRUD]
+            // Remarques:
+            //           - on transmet la prop updateAfterRemove pour la déclenchée après le delete d'un projet
+            //           - 
+            projectCardArray.push(<ProjectCard id={project.id} title={project.titre} description={project.description} updateProjectAfterRemove={updateProjectAfterRemove} />)
             if ((index + 1) % 3 === 0) {
                 // rq: on utilise un child propd ici
                 rowOfProjectCardArray.push(<BoostrapRow>{projectCardArray}</BoostrapRow>)
@@ -44,13 +74,18 @@ const ProjectMenu = () => {
 
         return [rowOfProjectCardArray, projectCardArray];
     }
-
     return (
         <div>
-            {}
+            <button className="btn btn-primary" onClick={() => setShowAddProjectComponent(true)} >Ajouter</button>
+
             {/* on affiche les projets uniquement si projectData != null */}
-            {ProjectData &&
+            {projectData &&
                 <BoostrapRow>{buildProjectLayout()}</BoostrapRow>}
+
+            {/*Tag: [CRUD] : remarques :
+                - Ce composant est afficher losqe l'utilisateur veut ajouter un projet. Sinon il est invisible */}
+            {/* - On transmet la prop closeEvent, pour permettre a la page modal de MAJ l'affichage du composant  */}
+            {showAddProjectComponent && <AddProject openState={showAddProjectComponent} closeEvent={setShowAddProjectComponent} />}
         </div >
     )
 

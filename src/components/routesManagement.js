@@ -7,15 +7,19 @@ import SignUpForm from './signUpForm lvl 3 bis/signUpForm lvl 3 bis'
 import { AuthContext } from "../App"
 import Project from '../pages/project'
 import TaskMenu from '../pages/taskMenu'
+import UserMenu from '../pages/userMenu'
 // tag: [router]
 // Ce que j'ai appris :
 // - withRouter permet d'accéder au parametre location, qui donne peut donner le pathname d'une url
+// - une route est associé à une url qui lui est associer à un composant
 const RoutesManagement = withRouter(({ location }) => {
     const { state } = useContext(AuthContext)
     return (
         <div>
             {
-                (location.pathname == "/home" || location.pathname == "/project" || location.pathname == "/project/" || location.pathname == "/task") && <NavBar />
+                (location.pathname == "/home" || location.pathname == "/project"
+                    || location.pathname == "/project/" || location.pathname == "/task"
+                    || location.pathname == "/user") && <NavBar />
             }
             <Switch>
                 <Route path="/" exact >
@@ -41,6 +45,9 @@ const RoutesManagement = withRouter(({ location }) => {
                 </Route>
                 <Route path="/project/:id">
                     {state.isAuthenticated ? <div><NavBar /> <Project /> </div> : <Redirect to="/signin" />}
+                </Route>
+                <Route path="/user" exact>
+                    {state.isAuthenticated ? <div><UserMenu /> </div> : <Redirect to="/signin" />}
                 </Route>
 
             </Switch>

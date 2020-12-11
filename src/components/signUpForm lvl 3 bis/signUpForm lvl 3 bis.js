@@ -3,32 +3,37 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import "./signUpForm.css";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
+import Axios from "axios";
 
 
 // Tag: [Formik]
 //Tuto
 const SignUpForm = () => {
 
-    const onSubmit = () => {
-        // envoie des données à nest js
-        console.log("submited successfully")
+    const onSubmit = async (values) => {
+        await console.log(values)
+        Axios.post("http://localhost:3000/signup", { user: values })
     }
 
     const initialValues = {
-        firstName: "",
-        lastName: "",
+        prenom: "",
+        nom: "",
         email: "",
-        userName: "",
+        nomUtilisateur: "",
+        motDePasse: "",
+        civilite: {
+            id: 1
+        }
     }
 
     const validationSchema = Yup.object({
-        firstName: Yup.string().required("Champs obligatoire"),
-        lastName: Yup.string().required("Champs obligatoire"),
+        prenom: Yup.string().required("Champs obligatoire"),
+        nom: Yup.string().required("Champs obligatoire"),
         email: Yup.string().email("Le format du mail est invalide").required("Champs obligatoire"),
-        userName: Yup.string().required("Champs obligatoire"),
-        password: Yup.string().required("Champs obligatoire"),
-        passwordConfirmation: Yup.string()
-            .oneOf([Yup.ref('password'), null], 'Les mots de passes doivent être identiques').required("champs obligatoire")
+        nomUtilisateur: Yup.string().required("Champs obligatoire"),
+        motDePasse: Yup.string().required("Champs obligatoire"),
+        motDePasseConfirmation: Yup.string()
+            .oneOf([Yup.ref('motDePasse'), null], 'Les mots de passes doivent être identiques').required("champs obligatoire")
 
     })
 
@@ -46,16 +51,17 @@ const SignUpForm = () => {
                     >
                         <div>
                             <Form>
+
                                 <div className="form-block">
-                                    <label htmlFor="firstName" > Prénom </label>
-                                    <Field type="text" id="firstName" name="firstName" className="form-control" />
-                                    <ErrorMessage name="firstName"  >{msg => <small className="text-danger">{msg}</small>}</ErrorMessage>
+                                    <label htmlFor="prenom" > Prénom </label>
+                                    <Field type="text" id="prenom" name="prenom" className="form-control" />
+                                    <ErrorMessage name="prenom"  >{msg => <small className="text-danger">{msg}</small>}</ErrorMessage>
                                 </div>
 
                                 <div className="form-block">
-                                    <label htmlFor="lastName" > Nom </label>
-                                    <Field type="text" id="lastName" name="lastName" className="form-control" />
-                                    <ErrorMessage name="lastName" >{msg => <small className="text-danger">{msg}</small>}</ErrorMessage>
+                                    <label htmlFor="nom" > Nom </label>
+                                    <Field type="text" id="nom" name="nom" className="form-control" />
+                                    <ErrorMessage name="nom" >{msg => <small className="text-danger">{msg}</small>}</ErrorMessage>
                                 </div>
 
                                 <div className="form-block">
@@ -65,22 +71,24 @@ const SignUpForm = () => {
                                 </div>
 
                                 <div className="form-block">
-                                    <label htmlFor="userName" > Nom d'utilisateur </label>
-                                    <Field type="text" id="userName" name="userName" className="form-control" />
-                                    <ErrorMessage name="userName"  >{msg => <small className="text-danger">{msg}</small>}</ErrorMessage>
+                                    <label htmlFor="nomUtilisateur" > Nom d'utilisateur </label>
+                                    <Field type="text" id="nomUtilisateur" name="nomUtilisateur" className="form-control" />
+                                    <ErrorMessage name="nomUtilisateur"  >{msg => <small className="text-danger">{msg}</small>}</ErrorMessage>
                                 </div>
 
                                 <div className="form-block">
-                                    <label htmlFor="password" > Mot de passe</label>
-                                    <Field type="password" id="password" name="password" className="form-control" />
-                                    <ErrorMessage name="password" >{msg => <small className="text-danger">{msg}</small>}</ErrorMessage>
+                                    <label htmlFor="motDePasse" > Mot de passe</label>
+                                    <Field type="motDePasse" id="motDePasse" name="motDePasse" className="form-control" />
+                                    <ErrorMessage name="motDePasse" >{msg => <small className="text-danger">{msg}</small>}</ErrorMessage>
                                 </div>
 
                                 <div className="form-block">
-                                    <label htmlFor="passwordConfirmation" > Confirmation mot de passe </label>
-                                    <Field type="password" id="passwordConfirmation" name="passwordConfirmation" className="form-control" />
-                                    <ErrorMessage name="passwordConfirmation"   >{msg => <small className="text-danger">{msg}</small>}</ErrorMessage>
+                                    <label htmlFor="motDePasseConfirmation" > Confirmation mot de passe </label>
+                                    <Field type="password" id="motDePasseConfirmation" name="motDePasseConfirmation" className="form-control" />
+                                    <ErrorMessage name="motDePasseConfirmation"   >{msg => <small className="text-danger">{msg}</small>}</ErrorMessage>
                                 </div>
+
+
                                 <button type="submit" className="btn btn-outline-primary" > Valider </button>
 
 

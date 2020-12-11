@@ -11,7 +11,6 @@ export const AddOperationContext = createContext()
 
 function Project() {
 
-    const state = useContext(AuthContext)
     // Remarque : permet de récupérer l'id présent dans l'url
     let { id } = useParams();
 
@@ -21,12 +20,11 @@ function Project() {
     const [taskData, setTaskData] = useFetch(`http://localhost:3000/project/task/${id}`)
     const [currentProjectData] = useFetch(`http://localhost:3000/project/${id}`)
 
-    const handleDeleteTask = (id) => {
-        Axios.delete(`http://localhost:3000/task/delete/${id}`, { headers: { Authorization: `Bearer ${state.token}` } })
-            .then(async () => {
-                let taskDataUpdated = await taskData.task.filter(el => el.id != id)
-                await setTaskData({ task: taskDataUpdated })
-            })
+    const updateTaskListAfterDelete = async (id) => {
+
+        let taskDataUpdated = await taskData.task.filter(el => el.id != id)
+        await setTaskData({ task: taskDataUpdated })
+
     }
 
     const handleAddTask = () => {
@@ -47,7 +45,7 @@ function Project() {
             <ul className="list-group">
                 {taskData && taskData.task.map((task) => {
                     return (
-                        <ProjectTask projectId={id} taskId={task.id} libelle={task.libelle} description={task.description} handleDelete={handleDeleteTask} />)
+                        <ProjectTask projectId={id} taskId={task.id} libelle={task.libelle} description={task.description} updateTaskListAfterDelete={updateTaskListAfterDelete} />)
                 })}
             </ul>
 
