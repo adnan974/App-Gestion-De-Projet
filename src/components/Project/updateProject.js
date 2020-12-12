@@ -11,13 +11,13 @@ function UpdateProject(props) {
     const initialValues = {
         id: props.projectData.id,
         titre: props.projectData.titre,
-        description: props.projectData.description
+        description: props.projectData.description,
+
     }
 
     // TAG: [CRUD]
     // Cette fonction sera transmise au projectForm, pour faire un submit lié à l'update
     const onSubmit = (values) => {
-        console.log(values)
         Axios.patch("http://localhost:3000/project/update", { project: values })
 
     }

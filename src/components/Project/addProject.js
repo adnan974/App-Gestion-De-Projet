@@ -12,6 +12,9 @@ function AddProject(props) {
         description: "",
         utilisateurCreation: {
             id: state.state.user.id
+        },
+        etatProjet: {
+            id: 1
         }
     }
 

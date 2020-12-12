@@ -2,10 +2,15 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useEffect } from "react";
 import * as Yup from "yup";
 import Modal from 'react-bootstrap/Modal'
+import Select from "../select";
+import { useFetch } from "../../shared/useFetch";
 
 // TAG:[CRUD]
 // Ceci est le formulaire commun qui sera affiché pour l'update et l'ajout d'un projet
 function ProjectForm(props) {
+
+    const [projectStateData] = useFetch("http://localhost:3000/projectstate")
+
 
     // Utile pour la validation du formulaire commun à l'ajout et à l'update
     const validationSchema = Yup.object({
@@ -64,6 +69,12 @@ function ProjectForm(props) {
                                     <label htmlFor="description" > Description </label>
                                     <Field type="text" id="description" name="description" className="form-control" />
                                     <ErrorMessage name="description"  >{msg => <small className="text-danger">{msg}</small>}</ErrorMessage>
+                                </div>
+                                {/* A FAIRE: Au lieu de transmettre les données des états directement dans props, je devrai utiliser une classe
+                                qui transforme les id en clé et les libellée en valeur. Sinon le composant <select> je pourra pas etre
+                                génrique. Voir composant pour plus de détails */}
+                                <div className="form-block">
+                                    {/* projectStateData && <Select labelValue="etatProjet" name="etatProjet.id" options={projectStateData.projectStateData}></Select> */}
                                 </div>
                             </div>
 
