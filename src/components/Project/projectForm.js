@@ -2,14 +2,16 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useEffect } from "react";
 import * as Yup from "yup";
 import Modal from 'react-bootstrap/Modal'
-import Select from "../select";
 import { useFetch } from "../../shared/useFetch";
+import { PROJECT_STATE_EN_TERMINE, PROJECT_STATE_EN_COURS } from "../../constants"
 
 // TAG:[CRUD]
 // Ceci est le formulaire commun qui sera affiché pour l'update et l'ajout d'un projet
 function ProjectForm(props) {
 
     const [projectStateData] = useFetch("http://localhost:3000/projectstate")
+
+    console.log("VALEUR CONTANTE : " + PROJECT_STATE_EN_TERMINE)
 
 
     // Utile pour la validation du formulaire commun à l'ajout et à l'update
@@ -20,6 +22,9 @@ function ProjectForm(props) {
 
     // Appele un onSubmit personnalisé en fonction de si c'est addProject ou updateProject qui l'appelle
     const onSubmit = (values) => {
+
+        values.etatProjet = { id: values.etatProjet }
+
         props.onSubmit(values)
     }
 
@@ -70,11 +75,27 @@ function ProjectForm(props) {
                                     <Field type="text" id="description" name="description" className="form-control" />
                                     <ErrorMessage name="description"  >{msg => <small className="text-danger">{msg}</small>}</ErrorMessage>
                                 </div>
-                                {/* A FAIRE: Au lieu de transmettre les données des états directement dans props, je devrai utiliser une classe
-                                qui transforme les id en clé et les libellée en valeur. Sinon le composant <select> je pourra pas etre
-                                génrique. Voir composant pour plus de détails */}
+                                {/* A FAIRE: Créer un select générique ? Il faudrait un composant qui prend comme props
+                                     un id de la balise, un tableau avec des clés et des valeurs*/}
                                 <div className="form-block">
-                                    {/* projectStateData && <Select labelValue="etatProjet" name="etatProjet.id" options={projectStateData.projectStateData}></Select> */}
+                                    {projectStateData &&
+                                        <div>
+                                            <label htmlFor="etatProjet">{props.labelValue}</label>
+                                            <Field as="select" name="etatProjet" id="etatProjet" className="form-control">
+
+                                                {
+                                                    projectStateData.projectStateData.map(option => {
+                                                        return (
+
+                                                            < option key={option.id} value={option.id} selected={option.id == PROJECT_STATE_EN_TERMINE ? true : false} > {option.libelle}</option>
+
+                                                        )
+                                                    })
+                                                }
+                                            </Field>
+                                        </div>
+                                    }
+
                                 </div>
                             </div>
 
@@ -90,7 +111,7 @@ function ProjectForm(props) {
             </Modal>
 
 
-        </div>
+        </div >
     )
 }
 

@@ -13,9 +13,6 @@ function AddProject(props) {
         utilisateurCreation: {
             id: state.state.user.id
         },
-        etatProjet: {
-            id: 1
-        }
     }
 
     const onSubmit = (values) => {

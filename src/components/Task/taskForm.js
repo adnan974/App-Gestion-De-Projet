@@ -13,6 +13,7 @@ function TaskForm(props) {
 
     const onSubmit = (values) => {
         props.onSubmit(values)
+        close()
     }
 
     const close = () => {
