@@ -1,17 +1,16 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import * as Yup from "yup";
 import Modal from 'react-bootstrap/Modal'
 import { useFetch } from "../../shared/useFetch";
-import { PROJECT_STATE_EN_TERMINE, PROJECT_STATE_EN_COURS } from "../../constants"
+import { PROJECT_STATE_TERMINE, PROJECT_STATE_EN_COURS } from "../../constants"
 
 // TAG:[CRUD]
 // Ceci est le formulaire commun qui sera affiché pour l'update et l'ajout d'un projet
 function ProjectForm(props) {
 
     const [projectStateData] = useFetch("http://localhost:3000/projectstate")
-
-    console.log("VALEUR CONTANTE : " + PROJECT_STATE_EN_TERMINE)
+    //const [projectStateValue, setProjectStateValue] = useState();
 
 
     // Utile pour la validation du formulaire commun à l'ajout et à l'update
@@ -22,10 +21,9 @@ function ProjectForm(props) {
 
     // Appele un onSubmit personnalisé en fonction de si c'est addProject ou updateProject qui l'appelle
     const onSubmit = (values) => {
-
-        values.etatProjet = { id: values.etatProjet }
-
-        props.onSubmit(values)
+        const refactoredValues = { ...values, etatProjet: { id: parseInt(values.etatProjet) } }
+        console.log(refactoredValues)
+        props.onSubmit(refactoredValues)
     }
 
     // Appele un close (au moment de quitter la page modale) personnalisé en fonction 
@@ -87,7 +85,7 @@ function ProjectForm(props) {
                                                     projectStateData.projectStateData.map(option => {
                                                         return (
 
-                                                            < option key={option.id} value={option.id} selected={option.id == PROJECT_STATE_EN_TERMINE ? true : false} > {option.libelle}</option>
+                                                            < option key={option.id} value={option.id}  > {option.libelle}</option>
 
                                                         )
                                                     })

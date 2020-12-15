@@ -48,11 +48,13 @@ const ProjectMenu = () => {
     // supprimée de l'interface côté client
     const updateProjectAfterRemove = async (id) => {
         let projectDataUpdated = await projectData.filter(el => el.id != id)
-        console.log(projectDataUpdated)
-        console.log(projectData)
+
         await setProjectData(projectDataUpdated)
 
     }
+
+
+
     const buildProjectLayout = () => {
 
 
@@ -60,11 +62,18 @@ const ProjectMenu = () => {
         let rowOfProjectCardArray = [];
 
         projectData.map((project, index) => {
+            console.log("projectData")
+            console.log(projectData)
+
             //// TAG:[CRUD]
             // Remarques:
             //           - on transmet la prop updateAfterRemove pour la déclenchée après le delete d'un projet
             //           - 
-            projectCardArray.push(<ProjectCard id={project.id} title={project.titre} description={project.description} updateProjectAfterRemove={updateProjectAfterRemove} />)
+
+            //  A FAIRE : ici je fais du prop drilling. les props dans project card vont être transmise à un autre composant
+            //            Le props drilling ne pose pas pb sur un petit nombre de composant. Mais est-ce que là c'est une
+            //            bonne pratique ?
+            projectCardArray.push(<ProjectCard id={project.id} title={project.titre} description={project.description} projectState={project.etatProjet} closeEvent={setShowAddProjectComponent} updateProjectAfterRemove={updateProjectAfterRemove} updateProjectAfterUpdate={setProjectData} projectCurrentData={projectData} />)
             if ((index + 1) % 3 === 0) {
                 // rq: on utilise un child propd ici
                 rowOfProjectCardArray.push(<BoostrapRow>{projectCardArray}</BoostrapRow>)
@@ -80,12 +89,13 @@ const ProjectMenu = () => {
 
             {/* on affiche les projets uniquement si projectData != null */}
             {projectData &&
+
                 <BoostrapRow>{buildProjectLayout()}</BoostrapRow>}
 
             {/*Tag: [CRUD] : remarques :
                 - Ce composant est afficher losqe l'utilisateur veut ajouter un projet. Sinon il est invisible */}
             {/* - On transmet la prop closeEvent, pour permettre a la page modal de MAJ l'affichage du composant  */}
-            {showAddProjectComponent && <AddProject openState={showAddProjectComponent} closeEvent={setShowAddProjectComponent} />}
+            {showAddProjectComponent && <AddProject openState={showAddProjectComponent} closeEvent={setShowAddProjectComponent} updateProjectAfterAdd={setProjectData} projectCurrentData={projectData} />}
         </div >
     )
 

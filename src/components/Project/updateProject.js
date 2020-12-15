@@ -12,13 +12,25 @@ function UpdateProject(props) {
         id: props.projectData.id,
         titre: props.projectData.titre,
         description: props.projectData.description,
+        etatProjet: props.projectData.etatProjet.id
+
+
 
     }
+
 
     // TAG: [CRUD]
     // Cette fonction sera transmise au projectForm, pour faire un submit lié à l'update
     const onSubmit = (values) => {
         Axios.patch("http://localhost:3000/project/update", { project: values })
+            .then(async () => {
+                const updatedProject = [values]
+                const updatedProjectsData = await props.projectCurrentData.map(obj => updatedProject.find(o => o.id === obj.id) || obj)
+
+
+                props.updateProjectAfterUpdate([...updatedProjectsData])
+                props.closeEvent()
+            })
 
     }
     return (
