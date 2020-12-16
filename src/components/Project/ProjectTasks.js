@@ -6,11 +6,13 @@ import AddTask from '../Task/addTask'
 import UpdateTask from '../Task/updateTask'
 
 
-//  A FAIRE: ou ranger les contextes ?
-export const UpdateOperationContext = createContext()
+
 
 
 function ProjectTask(props) {
+
+    console.log("props")
+    console.log(props)
 
     const state = useContext(AuthContext)
 
@@ -42,11 +44,8 @@ function ProjectTask(props) {
                     <button type="button" className="btn btn-danger btn-sm" onClick={() => { deleteTask(props.taskId) }}>Supprimer</button>
                 </div>
             </li>
-            <UpdateOperationContext.Provider
-                value={{ showUpdateTaskComponent, setShowUpdatetaskComponent }}
-            >
-                {showUpdateTaskComponent && <UpdateTask taskData={{ id: props.taskId, libelle: props.libelle, description: props.description }} projectId={props.projectId} />}
-            </UpdateOperationContext.Provider>
+
+            {showUpdateTaskComponent && <UpdateTask setShowUpdateComponent={setShowUpdatetaskComponent} taskStateElement={{ tasksData: props.taskStateElement.tasksData, setTasksData: props.taskStateElement.setTasksData }} setShowUpdatetaskComponent={setShowUpdatetaskComponent} taskData={{ id: props.taskId, libelle: props.libelle, description: props.description }} projectId={props.projectId} />}
         </div>
     )
 }

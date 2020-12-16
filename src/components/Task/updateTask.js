@@ -2,14 +2,13 @@ import React, { useContext } from 'react'
 
 import Axios from 'axios';
 import TaskForm from './taskForm';
-import { UpdateOperationContext } from '../Project/ProjectTasks';
+import { UPDATE_TASK_TITLE } from '../../constants';
 
 
 
 function UpdateTask(props) {
 
 
-    const state = useContext(UpdateOperationContext)
 
     const initialValues = {
         id: props.taskData.id,
@@ -26,8 +25,10 @@ function UpdateTask(props) {
     const onSubmit = (values) => {
         console.log(values)
         Axios.patch("http://localhost:3000/task/update", { task: values })
-            .then(() => {
-                console.log("succes")
+            .then(async () => {
+                const updatedTask = [values]
+                const updatedTaksData = await props.taskStateElement.tasksData.map(obj => updatedTask.find(o => o.id === obj.id) || obj)
+                props.taskStateElement.setTasksData({ tasks: updatedTaksData })
             })
             .catch((error) => {
                 console.log(error)
@@ -38,7 +39,7 @@ function UpdateTask(props) {
             2- Si je mets onSubmit= ()=>onSubmit, la validation ne marche pas */}
 
     return (
-        <TaskForm onSubmit={onSubmit} initialValues={initialValues} show={state.showUpdateTaskComponent} closeCallback={state.setShowUpdatetaskComponent} title="modifier la tâche"></TaskForm>
+        <TaskForm onSubmit={onSubmit} initialValues={initialValues} show={true} closeCallback={props.setShowUpdateComponent} title={UPDATE_TASK_TITLE}></TaskForm>
     )
 }
 

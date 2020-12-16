@@ -1,20 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { BoostrapRow } from '../components/bootstrapRow';
+import AddTask from '../components/Task/addTask';
 import TaskCard from '../components/taskCard';
 import { useFetch } from '../shared/useFetch'
 
 function TaskMenu() {
-    const [data] = useFetch("http://localhost:3000/user/task/")
+
+
+    const [tasksData, setTasksData] = useFetch("http://localhost:3000/user/task/");
+    const [showAddTaskComponent, setShowAddTaskComponent] = useState(false);
+
+
 
     // A FAIRE: rendre cette partie générique DEJA UTILISEE DANS projectMenu 
-    const buildProjectLayout = () => {
-
-
+    const buildTaskLayout = () => {
         let taskCardArray = [];
         let rowOfTaskCardArray = [];
-
-        data.map((task, index) => {
-            taskCardArray.push(<TaskCard id={task.id} libelle={task.libelle} description={task.description} />)
+        tasksData.tasks.map((task, index) => {
+            taskCardArray.push(<TaskCard taskData={{ id: task.id, libelle: task.libelle, description: task.description }} stateElement={{ tasksData: tasksData.tasks, setTasksData: setTasksData }} />)
             if ((index + 1) % 3 === 0) {
                 // rq: on utilise un child propd ici
                 rowOfTaskCardArray.push(<BoostrapRow>{taskCardArray}</BoostrapRow>)
@@ -26,7 +29,9 @@ function TaskMenu() {
     }
     return (
         <div>
-            {data && <BoostrapRow>{buildProjectLayout()}</BoostrapRow>}
+            <button className="btn btn-primary" onClick={() => setShowAddTaskComponent(true)} >Ajouter une Tâche </button>
+            {tasksData && <BoostrapRow>{buildTaskLayout()}</BoostrapRow>}
+            {showAddTaskComponent && <AddTask projectId={null} setShowAddTaskComponent={setShowAddTaskComponent} taskStateElement={{ tasksData: tasksData.tasks, setTasksData: setTasksData }} />}
         </div>
     )
 }

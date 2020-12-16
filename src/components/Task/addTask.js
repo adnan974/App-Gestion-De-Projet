@@ -1,14 +1,14 @@
-import React, { useContext } from 'react'
+import React from 'react'
 
 import Axios from 'axios';
 import TaskForm from './taskForm';
-import { AddOperationContext } from '../../pages/project';
+import { ADD_TASK_TITLE } from '../../constants';
 
 
 
 function AddTask(props) {
 
-    const state = useContext(AddOperationContext)
+
 
     const initialValues = {
         libelle: "",
@@ -24,8 +24,12 @@ function AddTask(props) {
     const onSubmit = (values) => {
 
         Axios.post("http://localhost:3000/task/create", { task: values })
-            .then(() => {
-                console.log("succes")
+            .then(async (res) => {
+                let updatedTaskData = await props.taskStateElement.tasksData
+                await updatedTaskData.push(res.data)
+
+                props.taskStateElement.setTasksData({ tasks: updatedTaskData })
+
             })
             .catch((error) => {
                 console.log(error)
@@ -36,7 +40,7 @@ function AddTask(props) {
             2- Si je mets onSubmit= ()=>onSubmit, la validation ne marche pas */}
 
     return (
-        <TaskForm onSubmit={onSubmit} initialValues={initialValues} show={state.showAddTaskComponent} closeCallback={state.setShowAddtaskComponent} title="ajouter une tâche"></TaskForm>
+        <TaskForm onSubmit={onSubmit} initialValues={initialValues} show={true} closeCallback={props.setShowAddTaskComponent} title={ADD_TASK_TITLE} ></TaskForm>
     )
 }
 

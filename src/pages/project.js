@@ -14,7 +14,7 @@ function Project() {
     // Remarque : permet de récupérer l'id présent dans l'url
     let { id } = useParams();
 
-    const [showAddTaskComponent, setShowAddtaskComponent] = useState(false)
+    const [showAddTaskComponent, setShowAddTaskComponent] = useState(false)
 
 
     const [taskData, setTaskData] = useFetch(`http://localhost:3000/project/task/${id}`)
@@ -22,13 +22,13 @@ function Project() {
 
     const updateTaskListAfterDelete = async (id) => {
 
-        let taskDataUpdated = await taskData.task.filter(el => el.id != id)
-        await setTaskData({ task: taskDataUpdated })
+        let taskDataUpdated = await taskData.tasks.filter(el => el.id != id)
+        await setTaskData({ tasks: taskDataUpdated })
 
     }
 
     const handleAddTask = () => {
-        setShowAddtaskComponent(true)
+        setShowAddTaskComponent(true)
     }
 
 
@@ -43,18 +43,15 @@ function Project() {
             <button type="button" className="btn btn-primary btn-sm" data-toggle="modal" data-target="#updateOrAddTaskModal" onClick={handleAddTask}>Ajouter</button>
 
             <ul className="list-group">
-                {taskData && taskData.task.map((task) => {
+                {taskData && taskData.tasks.map((task) => {
                     return (
-                        <ProjectTask projectId={id} taskId={task.id} libelle={task.libelle} description={task.description} updateTaskListAfterDelete={updateTaskListAfterDelete} />)
+                        <ProjectTask taskStateElement={{ tasksData: taskData.tasks, setTasksData: setTaskData }} projectId={id} taskId={task.id} libelle={task.libelle} description={task.description} updateTaskListAfterDelete={updateTaskListAfterDelete} />)
                 })}
             </ul>
 
 
-            <AddOperationContext.Provider
-                value={{ showAddTaskComponent, setShowAddtaskComponent }}
-            >
-                {showAddTaskComponent && <AddTask projectId={id} />}
-            </AddOperationContext.Provider>
+
+            {showAddTaskComponent && <AddTask projectId={id} setShowAddTaskComponent={setShowAddTaskComponent} taskStateElement={{ tasksData: taskData.tasks, setTasksData: setTaskData }} />}
 
 
         </div>
