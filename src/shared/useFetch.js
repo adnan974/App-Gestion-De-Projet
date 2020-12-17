@@ -4,6 +4,8 @@ import Axios from "axios";
 import { AuthContext } from "../App"
 
 // Tuto
+// A FAIRE: Modifier ce custom hook de sorte que les valeurs de retours ne soit pas undefinied
+// La fonction est asynchrone, du coup elle renvoie undifiend avant de renvoyer les data
 export const useFetch = (url) => {
 
     const { state } = useContext(AuthContext)
@@ -13,15 +15,15 @@ export const useFetch = (url) => {
     // Ici, on récupère les données de  l'api
     const getUrlData = async (url) => {
         await Axios.get(url, { headers: { Authorization: `Bearer ${state.token}` } })
-            .then(async (res) => {
+            .then((res) => {
                 // On ajoute les données dans data
-                await setData(res.data);
+                return setData(res.data);
             })
     }
 
     // Ce useEffect se comporte commme la méthode didMount. Cette fonction va l'executer à l'initialisation
     // du composant uniquement.
-    useEffect(async () => {
+    useEffect(() => {
         const fetchData = async () => {
             console.log("use Effect est appelé")
             await getUrlData(url)
@@ -30,4 +32,5 @@ export const useFetch = (url) => {
     }, [])
 
     return ([data, setData]);
+
 }

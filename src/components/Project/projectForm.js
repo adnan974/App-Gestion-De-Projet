@@ -1,16 +1,21 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useEffect, useState } from "react";
+
 import * as Yup from "yup";
 import Modal from 'react-bootstrap/Modal'
 import { useFetch } from "../../shared/useFetch";
 import { PROJECT_STATE_TERMINE, PROJECT_STATE_EN_COURS } from "../../constants"
+import "./projectForm.css"
+import TagListTest from "../projectTag/tagList";
+import TagList from "../projectTag/tagList";
 
 // TAG:[CRUD]
 // Ceci est le formulaire commun qui sera affiché pour l'update et l'ajout d'un projet
 function ProjectForm(props) {
 
-    const [projectStateData] = useFetch("http://localhost:3000/projectstate")
-    //const [projectStateValue, setProjectStateValue] = useState();
+    const [projectStateData] = useFetch("http://localhost:3000/projectstate");
+    const [selectedTag, setSelectedTag] = useState([]);
+    const [showTagList, setShowTagList] = useState(false);
 
 
     // Utile pour la validation du formulaire commun à l'ajout et à l'update
@@ -78,7 +83,7 @@ function ProjectForm(props) {
                                 <div className="form-block">
                                     {projectStateData &&
                                         <div>
-                                            <label htmlFor="etatProjet">{props.labelValue}</label>
+                                            <label htmlFor="etatProjet">Etat projet</label>
                                             <Field as="select" name="etatProjet" id="etatProjet" className="form-control">
 
                                                 {
@@ -95,6 +100,24 @@ function ProjectForm(props) {
                                     }
 
                                 </div>
+                                <div id="tagprojet">
+                                    <div onClick={() => setShowTagList(true)} className="form-block" >
+                                        {console.log("selectedTag project Form")}
+
+                                        {console.log(selectedTag)}
+                                        Pour tag ( construction )
+                                        {selectedTag.map(tag => {
+                                            return (
+                                                <span> {tag.libelle} </span>
+                                            )
+                                        })}
+                                    </div>
+                                    {/*Attention: j'ai séparé cette partie e la div d'en haut car elle contient ausis un evenement 
+                                    onClick. Si je met cette partie dans la div, l'évenement se déclachera mais en premier (voir eventbubling) */}
+                                    {showTagList && <TagList showTagList={showTagList} setShowTagList={setShowTagList} selectedTag={selectedTag} setSelectedTag={setSelectedTag} for="project" />}
+
+                                </div>
+
                             </div>
 
                             <div className="modal-footer">

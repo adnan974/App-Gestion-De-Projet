@@ -6,9 +6,9 @@ import ProjectTask from '../components/Project/ProjectTasks';
 import AddTask from '../components/Task/addTask';
 import { useFetch } from '../shared/useFetch'
 
-//  A FAIRE: ou ranger les contextes ?
-export const AddOperationContext = createContext()
-
+//  Tag[useParams]
+//  Ce composant est rempli d'une maniere particulière, dans le sens ou il n'a pas de props mais est appelé 
+//  après un Link. Je ne sais pas si c'est une bonne pratique
 function Project() {
 
     // Remarque : permet de récupérer l'id présent dans l'url

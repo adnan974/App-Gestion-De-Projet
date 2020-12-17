@@ -1,8 +1,8 @@
 import Axios from 'axios'
 import { useState } from 'react';
 import { Link } from 'react-router-dom'
-import { UPDATE_TASK_TITLE } from '../constants';
-import UpdateTask from './Task/updateTask';
+import { UPDATE_TASK_TITLE } from '../../constants';
+import UpdateTask from './updateTask';
 
 // A Faire: rendre cette partie générique avec projet card ?
 const TaskCard = (props) => {
@@ -29,7 +29,7 @@ const TaskCard = (props) => {
                     <h5 className="card-title" >{props.taskData.libelle}</h5>
                     <p className="card-text">{props.taskData.description} </p>
                     <Link to={`task/${props.taskData.id}`}>
-                        <button className="btn btn-primary">Accerder à la tâche</button>
+                        <button className="btn btn-primary" >Accerder à la tâche</button>
                     </Link>
                     <button className="btn btn-primary" onClick={() => setShowUpdateComponent(true)}>Modifier</button>
                     <button className="btn btn-danger" onClick={handleDelete}>Supprimer</button>

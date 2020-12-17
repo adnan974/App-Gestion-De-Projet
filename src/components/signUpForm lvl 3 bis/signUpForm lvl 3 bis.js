@@ -41,6 +41,9 @@ const SignUpForm = () => {
 
     return (
         <div className="container " id="signInComponent">
+            {/* TAG:[Boostrap] 
+                - Utiliser la classeName  "row justify-content-center"
+                C'est aussi simple que ça */}
             <div className="row justify-content-center">
                 <div className="col-lg-6">
                     <div className="card">
@@ -56,6 +59,8 @@ const SignUpForm = () => {
                                 <div>
                                     <Form>
 
+                                        {/*tag:[Formik] : ci-dessous, comment remplir une radio box avec 
+                                            des infos qui viennent d'une API */}
                                         {genderData && genderData.genders.map(gender => {
                                             return (
                                                 <div key={gender.id} className="form-check">

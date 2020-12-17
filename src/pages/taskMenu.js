@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { BoostrapRow } from '../components/bootstrapRow';
 import AddTask from '../components/Task/addTask';
-import TaskCard from '../components/taskCard';
+import TaskCard from '../components/Task/taskCard';
 import { useFetch } from '../shared/useFetch'
 
 function TaskMenu() {
