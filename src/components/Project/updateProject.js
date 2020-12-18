@@ -12,11 +12,14 @@ function UpdateProject(props) {
         id: props.projectData.id,
         titre: props.projectData.titre,
         description: props.projectData.description,
-        etatProjet: props.projectData.etatProjet.id
+        etatProjet: props.projectData.etatProjet.id,
+        tagProjet: props.projectData.tagProjet
 
 
 
     }
+
+
 
 
     // TAG: [CRUD]

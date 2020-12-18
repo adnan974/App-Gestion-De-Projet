@@ -73,7 +73,7 @@ const ProjectMenu = () => {
             //  A FAIRE : ici je fais du prop drilling. les props dans project card vont être transmise à un autre composant
             //            Le props drilling ne pose pas pb sur un petit nombre de composant. Mais est-ce que là c'est une
             //            bonne pratique ?
-            projectCardArray.push(<ProjectCard id={project.id} title={project.titre} description={project.description} projectState={project.etatProjet} closeEvent={setShowAddProjectComponent} updateProjectAfterRemove={updateProjectAfterRemove} updateProjectAfterUpdate={setProjectData} projectCurrentData={projectData} />)
+            projectCardArray.push(<ProjectCard id={project.id} title={project.titre} description={project.description} projectState={project.etatProjet} projectTags={project.tagProjet} closeEvent={setShowAddProjectComponent} updateProjectAfterRemove={updateProjectAfterRemove} updateProjectAfterUpdate={setProjectData} projectCurrentData={projectData} />)
             if ((index + 1) % 3 === 0) {
                 // rq: on utilise un child propd ici
                 rowOfProjectCardArray.push(<BoostrapRow>{projectCardArray}</BoostrapRow>)

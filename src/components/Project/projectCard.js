@@ -49,7 +49,7 @@ const ProjectCard = (props) => {
             {/*Tag: [CRUD] : remarques :
                 - Ce composant est afficher losqe l'utilisateur veut modifier un projet. Sinon il est invisible */}
             {/* - On transmet la prop closeEvent, pour permettre a la page modal de MAJ l'affichage du composant  */}
-            {showProjectUpdateComponent && <UpdateProject updateProjectAfterUpdate={props.updateProjectAfterUpdate} projectCurrentData={props.projectCurrentData} projectData={{ id: props.id, titre: props.title, description: props.description, etatProjet: props.projectState }} openState={showProjectUpdateComponent} closeEvent={setShowProjectUpdateComponent} />}
+            {showProjectUpdateComponent && <UpdateProject updateProjectAfterUpdate={props.updateProjectAfterUpdate} projectCurrentData={props.projectCurrentData} projectData={{ id: props.id, titre: props.title, description: props.description, etatProjet: props.projectState, tagProjet: props.projectTags }} openState={showProjectUpdateComponent} closeEvent={setShowProjectUpdateComponent} />}
         </div >
     )
 }

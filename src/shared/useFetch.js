@@ -23,7 +23,7 @@ export const useFetch = (url) => {
 
     // Ce useEffect se comporte commme la méthode didMount. Cette fonction va l'executer à l'initialisation
     // du composant uniquement.
-    useEffect(() => {
+    useEffect(async () => {
         const fetchData = async () => {
             console.log("use Effect est appelé")
             await getUrlData(url)
