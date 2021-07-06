@@ -3,6 +3,7 @@ import ProjectCard from "../components/Project/projectCard"
 import { BoostrapRow } from "../components/bootstrapRow";
 import { useFetch } from "../shared/useFetch";
 import AddProject from "../components/Project/addProject";
+import { BASE_URL } from "../constants";
 
 
 
@@ -22,7 +23,7 @@ const ProjectMenu = () => {
 
     //// TAG:[CRUD]
     // remarque: useFectch apelle une api pour récupérer les projets de l'utilisateur
-    const [projectData, setProjectData] = useFetch("http://localhost:3000/user/project")
+    const [projectData, setProjectData] = useFetch(`${BASE_URL}/user/project`)
 
     //Tag : [buildLayout]
     // Cette fonction va construire les balises ou seront stockés les projets.

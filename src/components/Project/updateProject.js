@@ -1,6 +1,7 @@
 import Axios from 'axios'
 import React from 'react'
 import ProjectForm from './projectForm'
+import {BASE_URL} from '../../constants'
 
 // TAG: [CRUD]
 // A FAIRE: Ajout des états projets
@@ -25,7 +26,7 @@ function UpdateProject(props) {
     // TAG: [CRUD]
     // Cette fonction sera transmise au projectForm, pour faire un submit lié à l'update
     const onSubmit = (values) => {
-        Axios.patch("http://localhost:3000/project/update", { project: values })
+        Axios.patch(`${BASE_URL}/project/update`, { project: values })
             .then(async () => {
                 const updatedProject = [values]
                 const updatedProjectsData = await props.projectCurrentData.map(obj => updatedProject.find(o => o.id === obj.id) || obj)

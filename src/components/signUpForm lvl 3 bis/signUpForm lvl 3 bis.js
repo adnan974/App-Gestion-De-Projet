@@ -5,18 +5,20 @@ import * as Yup from "yup";
 import { Link } from "react-router-dom";
 import Axios from "axios";
 import { useFetch } from "../../shared/useFetch";
+import {BASE_URL} from '../../constants'
 
 
 // Tag: [Formik]
 //Tuto
 const SignUpForm = () => {
 
-    const [genderData, setGenderData] = useFetch("http://localhost:3000/gender")
+    const [genderData, setGenderData] = useFetch(`${BASE_URL}/gender`)
+
 
     const onSubmit = async (values) => {
         let userToSend = values
         userToSend.civilite = { id: values.civilite }
-        Axios.post("http://localhost:3000/signup", { user: userToSend })
+        Axios.post(`${BASE_URL}/signup`, { user: userToSend })
     }
 
     const initialValues = {

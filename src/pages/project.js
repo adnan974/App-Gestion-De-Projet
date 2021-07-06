@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { AuthContext } from '../App';
 import ProjectTask from '../components/Project/ProjectTasks';
 import AddTask from '../components/Task/addTask';
+import { BASE_URL } from '../constants';
 import { useFetch } from '../shared/useFetch'
 
 //  Tag[useParams]
@@ -17,8 +18,8 @@ function Project() {
     const [showAddTaskComponent, setShowAddTaskComponent] = useState(false)
 
 
-    const [taskData, setTaskData] = useFetch(`http://localhost:3000/project/task/${id}`)
-    const [currentProjectData] = useFetch(`http://localhost:3000/project/${id}`)
+    const [taskData, setTaskData] = useFetch(`${BASE_URL}/project/task/${id}`)
+    const [currentProjectData] = useFetch(`${BASE_URL}/project/${id}`)
 
     const updateTaskListAfterDelete = async (id) => {
 

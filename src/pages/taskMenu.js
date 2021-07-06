@@ -2,12 +2,13 @@ import React, { useState } from 'react'
 import { BoostrapRow } from '../components/bootstrapRow';
 import AddTask from '../components/Task/addTask';
 import TaskCard from '../components/Task/taskCard';
-import { useFetch } from '../shared/useFetch'
+import { useFetch } from '../shared/useFetch';
+import {BASE_URL} from '../constants';
 
 function TaskMenu() {
 
 
-    const [tasksData, setTasksData] = useFetch("http://localhost:3000/user/task/");
+    const [tasksData, setTasksData] = useFetch(`${BASE_URL}/user/task/`);
     const [showAddTaskComponent, setShowAddTaskComponent] = useState(false);
 
 

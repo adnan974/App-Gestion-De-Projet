@@ -1,7 +1,7 @@
 import Axios from 'axios'
 import { useState } from 'react';
 import { Link } from 'react-router-dom'
-import { UPDATE_TASK_TITLE } from '../../constants';
+import { BASE_URL, UPDATE_TASK_TITLE } from '../../constants';
 import UpdateTask from './updateTask';
 
 // A Faire: rendre cette partie générique avec projet card ?
@@ -11,7 +11,7 @@ const TaskCard = (props) => {
 
     const handleDelete = () => {
         console.log(props.taskData.id)
-        Axios.delete(`http://localhost:3000/task/delete/${props.taskData.id}`)
+        Axios.delete(`${BASE_URL}/task/delete/${props.taskData.id}`)
             .then(async () => {
                 let updatedTasksData = await props.stateElement.tasksData.filter(task => task.id != props.taskData.id)
                 props.stateElement.setTasksData({ tasks: updatedTasksData })

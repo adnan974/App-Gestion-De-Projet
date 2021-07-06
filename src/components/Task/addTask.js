@@ -3,6 +3,7 @@ import React from 'react'
 import Axios from 'axios';
 import TaskForm from './taskForm';
 import { ADD_TASK_TITLE } from '../../constants';
+import {BASE_URL} from '../../constants';
 
 
 
@@ -23,7 +24,7 @@ function AddTask(props) {
 
     const onSubmit = (values) => {
 
-        Axios.post("http://localhost:3000/task/create", { task: values })
+        Axios.post(`${BASE_URL}/task/create`, { task: values })
             .then(async (res) => {
                 let updatedTaskData = await props.taskStateElement.tasksData
                 await updatedTaskData.push(res.data)

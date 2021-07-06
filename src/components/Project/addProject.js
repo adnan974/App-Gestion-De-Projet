@@ -2,7 +2,7 @@ import Axios from 'axios'
 import React, { useContext } from 'react'
 import { AuthContext } from '../../App'
 import ProjectForm from './projectForm'
-import { PROJECT_STATE_TERMINE, PROJECT_STATE_EN_COURS } from "../../constants"
+import { PROJECT_STATE_TERMINE, PROJECT_STATE_EN_COURS, BASE_URL } from "../../constants"
 import { useFetch } from '../../shared/useFetch'
 
 
@@ -17,11 +17,12 @@ function AddProject(props) {
             id: state.state.user.id
         },
         etatProjet: PROJECT_STATE_EN_COURS
+        
 
     }
 
     const onSubmit = (values) => {
-        Axios.post("http://localhost:3000/project/create", { project: values })
+        Axios.post(`${BASE_URL}/project/create`, { project: values })
             .then(async () => {
                 console.log("values :")
                 console.log(values)

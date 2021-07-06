@@ -2,6 +2,7 @@ import Axios from 'axios'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import UpdateProject from './updateProject';
+import {BASE_URL} from '../../constants'
 
 // TAG:[CRUD]
 
@@ -13,7 +14,7 @@ const ProjectCard = (props) => {
     const [showProjectUpdateComponent, setShowProjectUpdateComponent] = useState(false);
 
     const deleteProject = (id) => {
-        Axios.delete(`http://localhost:3000/project/delete/${id}`)
+        Axios.delete(`${BASE_URL}/project/delete/${id}`)
             .then(() => {
                 props.updateProjectAfterRemove(id)
             })

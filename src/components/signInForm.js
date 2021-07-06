@@ -6,6 +6,7 @@ import *  as Yup from "yup";
 import axios from 'axios';
 import { AuthContext } from "../App";
 import jwt_decode from "jwt-decode";
+import {BASE_URL} from '../constants'
 
 
 const SignInForm = () => {
@@ -24,7 +25,7 @@ const SignInForm = () => {
     const onSubmit = async (values) => {
         console.log(values);
 
-        await axios.post("http://localhost:3000/signin", values)
+        await axios.post(`${BASE_URL}/signin`, values)
             .then((res) => {
                 let jwt = res.data.access_token;
 

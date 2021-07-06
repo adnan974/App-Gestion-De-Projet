@@ -1,6 +1,6 @@
 import Axios from 'axios';
 import React, { useState } from 'react'
-import { URL_ADD_TAG_TO_A_PROJECT, URL_DELETE_PROJECT_TAG, URL_DELETE_TASK_TAG, URL_FETCH_PROJECT_TAGS, URL_FETCH_TASK_TAGS, URL_UPDATE_PROJECT_TAG } from '../../constants';
+import { BASE_URL,URL_ADD_TAG_TO_A_PROJECT, URL_DELETE_TASK_TAG, URL_FETCH_PROJECT_TAGS, URL_FETCH_TASK_TAGS, URL_UPDATE_PROJECT_TAG } from '../../constants';
 import { useFetch } from '../../shared/useFetch'
 
 // Tuto 
@@ -8,8 +8,8 @@ import { useFetch } from '../../shared/useFetch'
 function TagList(props) {
 
     console.log("for : " + props.for)
-    let urlForFetch = props.for == "project" ? URL_FETCH_PROJECT_TAGS : URL_FETCH_TASK_TAGS;
-    let urlForDelete = props.for == "project" ? URL_DELETE_PROJECT_TAG : URL_DELETE_TASK_TAG;
+    let urlForFetch = props.for == "project" ? `${BASE_URL}/projecttag` : `${BASE_URL}/tasktag`;
+    let urlForDelete = props.for == "project" ? `${BASE_URL}/projecttag/delete` : `${BASE_URL}/tasktag/delete`;
 
     const [tagsData, setTagsData] = useFetch(urlForFetch);
     const [showUpdate, setShowUpdate] = useState(false);

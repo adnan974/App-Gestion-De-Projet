@@ -1,5 +1,6 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
+import { BASE_URL } from '../../constants';
 import { useFetch } from '../../shared/useFetch';
 
 function TaskDetails() {
@@ -7,7 +8,7 @@ function TaskDetails() {
     const { id } = useParams();
 
 
-    const [taskData] = useFetch(`http://localhost:3000/task/${id}`);
+    const [taskData] = useFetch(`${BASE_URL}/task/${id}`);
 
     // ! Si les useFetch n'a pas fini son traitement, on affiche ça le temps qu'il finisse    
     if (!taskData) {

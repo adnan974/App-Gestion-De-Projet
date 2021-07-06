@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 
 import Axios from 'axios';
 import TaskForm from './taskForm';
-import { UPDATE_TASK_TITLE } from '../../constants';
+import { BASE_URL, UPDATE_TASK_TITLE } from '../../constants';
 
 
 
@@ -24,7 +24,7 @@ function UpdateTask(props) {
 
     const onSubmit = (values) => {
         console.log(values)
-        Axios.patch("http://localhost:3000/task/update", { task: values })
+        Axios.patch(`${BASE_URL}/task/update`, { task: values })
             .then(async () => {
                 const updatedTask = [values]
                 const updatedTaksData = await props.taskStateElement.tasksData.map(obj => updatedTask.find(o => o.id === obj.id) || obj)

@@ -10,3 +10,5 @@ export const URL_DELETE_TASK_TAG = "http://localhost:3000/tasktag/delete/"
 export const URL_ADD_TAG_TO_A_PROJECT = "http://localhost:3000/project/addtag/"
 export const URL_UPDATE_PROJECT_TAG = "http://localhost:3000/projecttag/update/"
 export const URL_UPDATE_PROJECT = "http://localhost:3000/project/update"
+
+export const BASE_URL = "https://app-gestion-de-projet.herokuapp.com"

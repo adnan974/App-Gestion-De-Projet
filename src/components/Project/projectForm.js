@@ -5,16 +5,15 @@ import { AiOutlineClose } from "react-icons/ai"
 import * as Yup from "yup";
 import Modal from 'react-bootstrap/Modal'
 import { useFetch } from "../../shared/useFetch";
-import { PROJECT_STATE_TERMINE, PROJECT_STATE_EN_COURS, URL_UPDATE_PROJECT } from "../../constants"
+import { BASE_URL } from "../../constants"
 import "./projectForm.css"
-import TagListTest from "../projectTag/tagList";
 import TagList from "../projectTag/tagList";
 import Axios from "axios";
 
 // TAG:[CRUD]
 // Ceci est le formulaire commun qui sera affiché pour l'update et l'ajout d'un projet
 function ProjectForm(props) {
-    const [projectStateData] = useFetch("http://localhost:3000/projectstate");
+    const [projectStateData] = useFetch(`${BASE_URL}/projectstate`);
 
     const [selectedTag, setSelectedTag] = useState(props.initialValues.tagProjet);
     const [showTagList, setShowTagList] = useState(false);
@@ -43,7 +42,7 @@ function ProjectForm(props) {
         let updatedSelectedTag = selectedTag.filter(tag => tag.id != id)
         setSelectedTag(updatedSelectedTag)
 
-        Axios.patch(URL_UPDATE_PROJECT, { project: { ...props.initialValues, tagProjet: updatedSelectedTag } })
+        Axios.patch(`${BASE_URL}/project/update`, { project: { ...props.initialValues, tagProjet: updatedSelectedTag } })
             .then(res => {
                 console.log("success")
             })
@@ -116,11 +115,11 @@ function ProjectForm(props) {
                                     <div onClick={() => setShowTagList(!showTagList)} className="form-block" >
 
                                         Tags(en construction) :
-                                        {selectedTag.map(tag => {
+                                        {/* selectedTag.map(tag => {
                                         return (
                                             <span> {tag.libelle} <AiOutlineClose onClick={() => deleteTag(tag.id)} /> </span>
                                         )
-                                    })}
+                                    }) */}
                                     </div>
                                     {/*Attention: j'ai séparé cette partie e la div d'en haut car elle contient ausis un evenement 
                                     onClick. Si je met cette partie dans la div, l'évenement se déclachera mais en premier (voir eventbubling) */}
